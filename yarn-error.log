@@ -1,8 +1,8 @@
 Arguments: 
-  /opt/homebrew/Cellar/node@16/16.12.0/libexec/node /opt/homebrew/bin/yarn add -D @commitlint
+  /opt/homebrew/Cellar/node@16/16.12.0/libexec/node /opt/homebrew/bin/yarn add mongo-client
 
 PATH: 
-  /opt/homebrew/opt/python@3.10/bin:/opt/homebrew/Cellar/node@16/16.12.0/bin:/opt/homebrew/opt/node@12/bin:/Users/artem/bin:/usr/local/bin:/Users/artem/.fastlane/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/go/bin:/Library/Apple/usr/bin:/opt/homebrew/opt/node@12/bin:/Users/artem/.fastlane/bin:/opt/homebrew/bin:/opt/homebrew/sbin:/Users/artem/Library/Android/sdk/tools:/Users/artem/Library/Android/sdk/emulator:/Users/artem/Library/Android/sdk/tools/bin:/Users/artem/Library/Android/sdk/platform-tools:/Users/artem/Library/Android/sdk/tools:/Users/artem/Library/Android/sdk/emulator:/Users/artem/Library/Android/sdk/tools/bin:/Users/artem/Library/Android/sdk/platform-tools
+  /opt/homebrew/opt/python@3.10/bin:/opt/homebrew/Cellar/node@16/16.12.0/bin:/opt/homebrew/opt/node@12/bin:/Users/artem/bin:/usr/local/bin:/Users/artem/.fastlane/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/go/bin:/Library/Apple/usr/bin:/opt/homebrew/opt/node@12/bin:/Users/artem/bin:/Users/artem/.fastlane/bin:/opt/homebrew/bin:/opt/homebrew/sbin:/Users/artem/Library/Android/sdk/tools:/Users/artem/Library/Android/sdk/emulator:/Users/artem/Library/Android/sdk/tools/bin:/Users/artem/Library/Android/sdk/platform-tools:/Users/artem/Library/Android/sdk/tools:/Users/artem/Library/Android/sdk/emulator:/Users/artem/Library/Android/sdk/tools/bin:/Users/artem/Library/Android/sdk/platform-tools
 
 Yarn version: 
   1.22.17
@@ -14,17 +14,10 @@ Platform:
   darwin arm64
 
 Trace: 
-  Error: https://registry.yarnpkg.com/@commitlint: Request "https://registry.yarnpkg.com/@commitlint" returned a 405
-      at Request.params.callback [as _callback] (/opt/homebrew/lib/node_modules/yarn/lib/cli.js:67038:18)
-      at Request.self.callback (/opt/homebrew/lib/node_modules/yarn/lib/cli.js:140883:22)
-      at Request.emit (node:events:390:28)
-      at Request.<anonymous> (/opt/homebrew/lib/node_modules/yarn/lib/cli.js:141855:10)
-      at Request.emit (node:events:390:28)
-      at IncomingMessage.<anonymous> (/opt/homebrew/lib/node_modules/yarn/lib/cli.js:141777:12)
-      at Object.onceWrapper (node:events:509:28)
-      at IncomingMessage.emit (node:events:402:35)
-      at endReadableNT (node:internal/streams/readable:1343:12)
-      at processTicksAndRejections (node:internal/process/task_queues:83:21)
+  Error: https://github.com/Raynos/reducible: ETIMEDOUT
+      at Timeout._onTimeout (/opt/homebrew/lib/node_modules/yarn/lib/cli.js:141543:19)
+      at listOnTimeout (node:internal/timers:557:17)
+      at processTimers (node:internal/timers:500:7)
 
 npm manifest: 
   {
@@ -36,16 +29,18 @@ npm manifest:
       "express": "^4.17.1"
     },
     "scripts": {
+      "postinstall": "postinstall.sh",
       "start": "node ./build/index.js",
       "build": "tsc",
       "dev": "nodemon ./src/index.ts",
-      "lint": "eslint \"./src/*.{ts,js}\""
+      "lint": "eslint \"./src/**/*.{ts,js}\""
     },
     "devDependencies": {
+      "@commitlint/cli": "^13.2.1",
+      "@commitlint/config-conventional": "^13.2.0",
       "@types/express": "^4.17.13",
       "@typescript-eslint/eslint-plugin": "^5.2.0",
       "@typescript-eslint/parser": "^5.2.0",
-      "commitlint": "^13.2.1",
       "eslint": "^8.1.0",
       "husky": "^7.0.4",
       "lint-staged": "^11.2.6",
@@ -98,6 +93,13 @@ Lockfile:
       resolve-from "5.0.0"
       resolve-global "1.0.0"
       yargs "^17.0.0"
+  
+  "@commitlint/config-conventional@^13.2.0":
+    version "13.2.0"
+    resolved "https://registry.yarnpkg.com/@commitlint/config-conventional/-/config-conventional-13.2.0.tgz#2ad24fecc56ae9619dbe0934b98a98b18ace0bec"
+    integrity sha512-7u7DdOiF+3qSdDlbQGfpvCH8DCQdLFvnI2+VucYmmV7E92iD6t9PBj+UjIoSQCaMAzYp27Vkall78AkcXBh6Xw==
+    dependencies:
+      conventional-changelog-conventionalcommits "^4.3.1"
   
   "@commitlint/ensure@^13.2.0":
     version "13.2.0"
@@ -834,14 +836,6 @@ Lockfile:
     resolved "https://registry.yarnpkg.com/commander/-/commander-8.3.0.tgz#4837ea1b2da67b9c616a67afbb0fafee567bca66"
     integrity sha512-OkTL9umf+He2DZkUq8f8J9of7yL6RJKI24dVITBmNfZBmri9zYZQrKkuXiKhyfPSu8tUhnVBB1iKXevvnlR4Ww==
   
-  commitlint@^13.2.1:
-    version "13.2.1"
-    resolved "https://registry.yarnpkg.com/commitlint/-/commitlint-13.2.1.tgz#99333fab4d7b3ece95fed915dd15daf9a11563e6"
-    integrity sha512-ZqmqXrObQ5MBzP+1d7OrmSweqiGm8EzjchcuaHktfj5wsuuqIIAYt3xkqwUeo37Do8DaUpCh+m9sEYIxuvbQ0g==
-    dependencies:
-      "@commitlint/cli" "^13.2.1"
-      "@commitlint/types" "^13.2.0"
-  
   compare-func@^2.0.0:
     version "2.0.0"
     resolved "https://registry.yarnpkg.com/compare-func/-/compare-func-2.0.0.tgz#fb65e75edbddfd2e568554e8b5b05fff7a51fcb3"
@@ -885,6 +879,15 @@ Lockfile:
     integrity sha512-i/gipMxs7s8L/QeuavPF2hLnJgH6pEZAttySB6aiQLWcX3puWDL3ACVmvBhJGxnAy52Qc15ua26BufY6KpmrVA==
     dependencies:
       compare-func "^2.0.0"
+      q "^1.5.1"
+  
+  conventional-changelog-conventionalcommits@^4.3.1:
+    version "4.6.1"
+    resolved "https://registry.yarnpkg.com/conventional-changelog-conventionalcommits/-/conventional-changelog-conventionalcommits-4.6.1.tgz#f4c0921937050674e578dc7875f908351ccf4014"
+    integrity sha512-lzWJpPZhbM1R0PIzkwzGBCnAkH5RKJzJfFQZcl/D+2lsJxAwGnDKBqn/F4C1RD31GJNn8NuKWQzAZDAVXPp2Mw==
+    dependencies:
+      compare-func "^2.0.0"
+      lodash "^4.17.15"
       q "^1.5.1"
   
   conventional-commits-parser@^3.2.2:
