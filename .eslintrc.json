@@ -32,6 +32,7 @@
             "error",
             "always"
         ],
-        "no-unused-vars": "error"
+        "no-unused-vars": "error",
+        "no-empty": "off"
     }
 }
